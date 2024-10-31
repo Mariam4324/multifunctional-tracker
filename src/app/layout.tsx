@@ -1,24 +1,21 @@
-"use client";
-import { ThemeProvider, createTheme } from "@mui/material";
-import "./globals.css";
+import "./globals.scss";
+import { Poppins } from "next/font/google";
+import { Metadata } from "next";
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#1976d2",
-    },
-    secondary: {
-      main: "#dc004e",
-    },
-  },
+const poppinsFont = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
 });
+
+export const metadata: Metadata = {
+  title: "LifeTrack Pro",
+  description: "Your Ultimate Wellness Dashboard",
+};
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>
-        <ThemeProvider theme={theme}>{children}</ThemeProvider>;
-      </body>
+      <body className={poppinsFont.className}>{children}</body>
     </html>
   );
 }
