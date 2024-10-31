@@ -19,10 +19,11 @@ export default function Page() {
 
         <div className="main-form__holder">
           <TextField
+            className="white-text-field"
             style={{
               color: "#fff",
               width: "100%",
-              maxWidth: "500px",
+              maxWidth: "700px",
             }}
             id="outlined-textarea"
             label="Name"
@@ -30,10 +31,11 @@ export default function Page() {
             multiline
           />
           <TextField
+            className="white-text-field"
             style={{
               color: "#fff",
               width: "100%",
-              maxWidth: "500px",
+              maxWidth: "700px",
             }}
             id="outlined-password-input"
             label="Password"
@@ -43,10 +45,11 @@ export default function Page() {
           />
 
           <TextField
+            className="white-text-field"
             style={{
               color: "#fff",
               width: "100%",
-              maxWidth: "500px",
+              maxWidth: "700px",
             }}
             id="outlined-email-input"
             label="Email"
@@ -56,10 +59,11 @@ export default function Page() {
         </div>
 
         <Button
+          className="main-form__btn"
           href="/dashboard"
           style={{
             width: "100%",
-            maxWidth: "500px",
+            maxWidth: "700px",
             marginTop: "15px",
             fontWeight: "700",
             textTransform: "none",
