@@ -1,26 +1,16 @@
-import { Button, Link, TextField } from "@mui/material";
-import GoogleIcon from "@mui/icons-material/Google";
+import { Button, TextField } from "@mui/material";
 import ArrowCircleRightRoundedIcon from "@mui/icons-material/ArrowCircleRightRounded";
-import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 
-export default function Page() {
+const page = () => {
   return (
     <section className="main">
-      <h1 className="main__title">Welcome to LifeTrack Pro!</h1>
+      <h1 className="main__title">Nice to see you!</h1>
       <h2 className="main__subtitle">Here you can track your work, studies, health and more!</h2>
 
       <form className="main-form" action="/">
         <div className="main-form__register">
-          <span className="main-form__title">Register with</span>
-
-          <div className="main-form__icons">
-            <Link href="/">{<GoogleIcon fontSize="large" sx={{ marginTop: "19px", color: "#fff", border: "1px solid #fff", borderRadius: "7px", padding: "5px" }} />}</Link>
-            
-            <Link href="/register">{<AlternateEmailIcon fontSize="large" sx={{ marginTop: "19px", color: "#fff", border: "1px solid #fff", borderRadius: "7px", padding: "5px" }} />}</Link>
-          </div>
+          <span className="main-form__title">Register</span>
         </div>
-
-        <span className="main-form__or">or</span>
 
         <div className="main-form__holder">
           <TextField
@@ -76,9 +66,11 @@ export default function Page() {
           variant="outlined"
           endIcon={<ArrowCircleRightRoundedIcon />}
         >
-          Sign up
+          Let's go
         </Button>
       </form>
     </section>
   );
-}
+};
+
+export default page;

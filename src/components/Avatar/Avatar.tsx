@@ -9,7 +9,13 @@ const Avatar = () => {
 
       <div className={css.avatar__info}>
         <Typography variant="h6">Username</Typography>
-        <Typography variant="h7">User email</Typography>
+        <Typography
+          style={{
+            fontSize: "14px",
+          }}
+        >
+          User email
+        </Typography>
       </div>
     </div>
   );

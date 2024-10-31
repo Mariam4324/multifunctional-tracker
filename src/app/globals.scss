@@ -97,6 +97,13 @@ span {
     background-color: rgba($color: #b0a2a281, $alpha: 0.5);
     border-radius: 14px;
 
+    &__icons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+    }
+
     &__title {
       font-size: 18px;
       font-weight: 700;
