@@ -1,0 +1,17 @@
+.avatar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 12px;
+  padding: 12px;
+  background: var(--bg);
+  border: 1px solid #e8e7e7;
+  box-shadow: 0px 1px 50px 0px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}

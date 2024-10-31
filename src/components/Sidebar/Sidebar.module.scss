@@ -1,0 +1,11 @@
+.sidebar {
+  &__menu {
+    margin-top: 25px;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+}

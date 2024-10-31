@@ -15,7 +15,7 @@ const theme = createTheme({
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="ru">
+    <html lang="en">
       <body>
         <ThemeProvider theme={theme}>{children}</ThemeProvider>;
       </body>
