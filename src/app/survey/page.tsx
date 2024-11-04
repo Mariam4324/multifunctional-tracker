@@ -1,5 +1,8 @@
 "use client";
 import Question from "@/components/Question/Question";
+import { Button } from "@mui/material";
+import { useEffect, useState } from "react";
+import css from "./survey.module.scss";
 
 const questions = [
   {
@@ -20,11 +23,58 @@ const questions = [
 ];
 
 const page = () => {
+  const [pageNumber, setPageNumber] = useState(1);
+
+  // useEffect(() => {}, [])
+
+  const currentQuestion = questions.filter((el) => el.id == pageNumber);
+
+  const scrollPageHandler = () => {
+    if (pageNumber < 1 || pageNumber > 3) {
+      return setPageNumber(1), console.log(pageNumber, currentQuestion);
+    } else {
+      return setPageNumber((prevPageNumber) => prevPageNumber + 1), console.log(pageNumber, currentQuestion);
+    }
+  };
+
+  const scrollPageBackHandler = () => {
+    if (pageNumber < 1 || pageNumber > 3) {
+      return setPageNumber(1), console.log(pageNumber, currentQuestion);
+    } else {
+      return setPageNumber((prevPageNumber) => prevPageNumber - 1), console.log(pageNumber, currentQuestion);
+    }
+  };
+
   return (
-    <div>
-      {questions.map((que) => {
-        return <Question key={que.id} queTitle={que.question} queAnswers={que.options} />;
-      })}
+    <div className={css.survey}>
+      <div>{<Question queTitle={currentQuestion[0].question} queAnswers={currentQuestion[0].options} />}</div>
+      <div className={css.survey__btns}>
+        <Button
+          onClick={() => scrollPageBackHandler()}
+          style={{
+            borderColor: "black",
+            color: "black",
+            textTransform: "none",
+            maxWidth: "300px",
+          }}
+          variant="outlined"
+        >
+          Back
+        </Button>
+
+        <Button
+          onClick={() => scrollPageHandler()}
+          style={{
+            borderColor: "black",
+            color: "black",
+            textTransform: "none",
+            maxWidth: "300px",
+          }}
+          variant="outlined"
+        >
+          Next
+        </Button>
+      </div>
     </div>
   );
 };
