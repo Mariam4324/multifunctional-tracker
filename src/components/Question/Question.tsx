@@ -1,7 +1,6 @@
-import { Button, FormControl, RadioGroup, Typography } from "@mui/material";
+import { FormControl, RadioGroup, Typography } from "@mui/material";
 import SurveyRadio from "../SurverRadio/SurveyRadio";
 import css from "./Question.module.scss";
-// import { useState } from "react";
 
 interface QuestionProps {
   queTitle: string;
@@ -9,8 +8,6 @@ interface QuestionProps {
 }
 
 const Question = ({ queTitle, queAnswers }: QuestionProps) => {
-  // const [pageNumber, setPageNumber] = useState(1);
-
   return (
     <section className={css.que}>
       <div className="container">

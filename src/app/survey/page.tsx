@@ -1,8 +1,9 @@
 "use client";
 import Question from "@/components/Question/Question";
 import { Button } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import css from "./survey.module.scss";
+import { useRouter } from "next/router";
 
 const questions = [
   {
@@ -23,31 +24,34 @@ const questions = [
 ];
 
 const page = () => {
-  const [pageNumber, setPageNumber] = useState(1);
-
-  // useEffect(() => {}, [])
-
-  const currentQuestion = questions.filter((el) => el.id == pageNumber);
+  const router = useRouter();
+  const [currentQuestionId, setCurrentQuestionId] = useState(1);
+  let currentQuestion = questions.filter((el) => el.id === currentQuestionId);
+  console.log(currentQuestionId, currentQuestion);
 
   const scrollPageHandler = () => {
-    if (pageNumber < 1 || pageNumber > 3) {
-      return setPageNumber(1), console.log(pageNumber, currentQuestion);
+    if (currentQuestionId < questions.length) {
+      setCurrentQuestionId((prev) => prev + 1);
+      return (currentQuestion = questions.filter((el) => el.id === currentQuestionId)), console.log(currentQuestionId, currentQuestion);
     } else {
-      return setPageNumber((prevPageNumber) => prevPageNumber + 1), console.log(pageNumber, currentQuestion);
+      return router.push("/dashboard");
     }
   };
 
   const scrollPageBackHandler = () => {
-    if (pageNumber < 1 || pageNumber > 3) {
-      return setPageNumber(1), console.log(pageNumber, currentQuestion);
+    if (currentQuestionId === 1) {
+      setCurrentQuestionId(1);
+      return (currentQuestion = questions.filter((el) => el.id === currentQuestionId)), console.log(currentQuestionId, currentQuestion);
     } else {
-      return setPageNumber((prevPageNumber) => prevPageNumber - 1), console.log(pageNumber, currentQuestion);
+      setCurrentQuestionId((prev) => prev - 1);
+      return (currentQuestion = questions.filter((el) => el.id === currentQuestionId)), console.log(currentQuestionId, currentQuestion);
     }
   };
 
   return (
     <div className={css.survey}>
-      <div>{<Question queTitle={currentQuestion[0].question} queAnswers={currentQuestion[0].options} />}</div>
+      <div>{currentQuestionId > 3 ? <button>закончить</button> : <Question queTitle={currentQuestion[0].question} queAnswers={currentQuestion[0].options} />}</div>
+      {/* <div>{<Question currentQuestionId={currentQuestionId} />}</div> */}
       <div className={css.survey__btns}>
         <Button
           onClick={() => scrollPageBackHandler()}
@@ -61,7 +65,6 @@ const page = () => {
         >
           Back
         </Button>
-
         <Button
           onClick={() => scrollPageHandler()}
           style={{
