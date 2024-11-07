@@ -1,7 +1,7 @@
 import { Button, Link, TextField } from "@mui/material";
 import GoogleIcon from "@mui/icons-material/Google";
 import ArrowCircleRightRoundedIcon from "@mui/icons-material/ArrowCircleRightRounded";
-import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
+import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 
 export default function Page() {
   return (
@@ -15,7 +15,7 @@ export default function Page() {
 
           <div className="main-form__icons">
             <Link href="/">{<GoogleIcon fontSize="large" sx={{ marginTop: "19px", color: "#fff", border: "1px solid #fff", borderRadius: "7px", padding: "5px" }} />}</Link>
-            
+
             <Link href="/register">{<AlternateEmailIcon fontSize="large" sx={{ marginTop: "19px", color: "#fff", border: "1px solid #fff", borderRadius: "7px", padding: "5px" }} />}</Link>
           </div>
         </div>

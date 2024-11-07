@@ -13,13 +13,15 @@ const Question = ({ queTitle, queAnswers }: QuestionProps) => {
       <div className="container">
         <div className={css.que__holder}>
           <Typography color="black" variant="h4">
-            {queTitle}
+            {queTitle || "Вопрос отсутвукет"}
           </Typography>
           <FormControl className={css.que__options}>
             <RadioGroup row aria-labelledby="demo-row-radio-buttons-group-label" name="row-radio-buttons-group">
-              {[...queAnswers].map((el) => {
-                return <SurveyRadio key={el} value={el} />;
-              })}
+              {queAnswers.length
+                ? [...queAnswers].map((el) => {
+                    return <SurveyRadio key={el} value={el} />;
+                  })
+                : "Loading"}
             </RadioGroup>
           </FormControl>
         </div>
