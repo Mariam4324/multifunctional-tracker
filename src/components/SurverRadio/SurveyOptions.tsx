@@ -4,7 +4,7 @@ interface SurveyRadioProps {
   value: string;
 }
 
-const SurveyRadio = ({ value }: SurveyRadioProps) => {
+const SurveyOptions = ({ value }: SurveyRadioProps) => {
   return (
     <FormControlLabel
       style={{
@@ -27,4 +27,4 @@ const SurveyRadio = ({ value }: SurveyRadioProps) => {
   );
 };
 
-export default SurveyRadio;
+export default SurveyOptions;
