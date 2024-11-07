@@ -3,21 +3,22 @@ import Question from "@/components/Question/Question";
 import { Button, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import css from "./survey.module.scss";
+import StartRoundedIcon from "@mui/icons-material/StartRounded";
 
 const questions = [
   {
     id: 1,
-    question: "For what purpose do you want to use this application?",
-    options: ["Work", "Studies", "Creation", "Daily basis"],
+    question: "What will you use this app for?",
+    options: ["work", "studies", "business", "creation", "everything"],
   },
   {
     id: 2,
-    question: "How often do you plan to use this application?",
-    options: ["Daily", "Once a week", "Once a month"],
+    question: "How often will you use this app?",
+    options: ["daily", "sometimes", "rerely"],
   },
   {
     id: 3,
-    question: "Are you ready to tell your friends about us if you like this app?",
+    question: "Are you ready to help me improve?",
     options: ["Yes", "No"],
   },
 ];
@@ -54,49 +55,36 @@ const page = () => {
 
   return (
     <div className={css.survey}>
-      <div>
-        {currentQuestionId > questions.length ? (
+      {currentQuestionId > questions.length ? (
+        <>
           <div className={css["survey-finish"]}>
-            <Typography className={css["survey-finish__title"]} variant="h6" color="white">
+            <Typography className={css["survey-finish__title"]} color="white">
               Thanks!
             </Typography>
-            <Button className={css["survey-finish__btn"]} href="/dashboard">
+            <Button className={css["survey-finish__btn"]} href="/dashboard" endIcon={<StartRoundedIcon />}>
               Finish
             </Button>
           </div>
-        ) : (
-          <Question queTitle={currentQue.question} queAnswers={currentQue.options} />
-        )}
-      </div>
 
-      <div className={css.survey__btns}>
-        <Button
-          onClick={scrollPageBackHandler}
-          style={{
-            borderColor: "black",
-            color: "black",
-            textTransform: "none",
-            maxWidth: "300px",
-          }}
-          variant="outlined"
-          disabled={currentQuestionId === 1}
-        >
-          Back
-        </Button>
-        <Button
-          onClick={scrollPageHandler}
-          style={{
-            borderColor: "black",
-            color: "black",
-            textTransform: "none",
-            maxWidth: "300px",
-          }}
-          variant="outlined"
-          disabled={currentQuestionId > questions.length}
-        >
-          Next
-        </Button>
-      </div>
+          <div className={css.survey__btns}>
+            <Button className={css["survey-btn"]} onClick={scrollPageBackHandler} variant="outlined" disabled={currentQuestionId === 1}>
+              Back
+            </Button>
+          </div>
+        </>
+      ) : (
+        <>
+          <Question queTitle={currentQue.question} queAnswers={currentQue.options} />
+          <div className={css.survey__btns}>
+            <Button className={css["survey-btn"]} onClick={scrollPageBackHandler} variant="outlined" disabled={currentQuestionId === 1}>
+              Back
+            </Button>
+            <Button className={css["survey-btn"]} onClick={scrollPageHandler} variant="outlined" disabled={currentQuestionId > questions.length}>
+              Next
+            </Button>
+          </div>
+        </>
+      )}
     </div>
   );
 };

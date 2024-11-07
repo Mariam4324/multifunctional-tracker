@@ -9,12 +9,19 @@ const SurveyRadio = ({ value }: SurveyRadioProps) => {
     <FormControlLabel
       style={{
         padding: "7px",
-        marginRight: "0",
-        color: "black",
+        margin: 0,
+        fontWeight: "700",
       }}
       labelPlacement="bottom"
       value={value}
-      control={<Radio color="default" size="small" />}
+      control={
+        <Radio
+          style={{
+            color: "white",
+          }}
+          size="small"
+        />
+      }
       label={value}
     />
   );
