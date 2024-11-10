@@ -21,6 +21,7 @@ const Page = () => {
       name: "",
       email: "",
       password: "",
+      confirmPassword: "",
     },
     resolver: zodResolver(schema),
   });
