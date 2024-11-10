@@ -2,39 +2,37 @@
 import { Button, TextField } from "@mui/material";
 import ArrowCircleRightRoundedIcon from "@mui/icons-material/ArrowCircleRightRounded";
 import css from "./Register.module.scss";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { z } from "zod";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-
-type FormField = {
-  name: string;
-  email: string;
-  password: string;
-};
-
-// Валидация с использованием Zod
-const schema = z.object({
-  name: z.string().min(2, "Name must be at least 2 characters long").max(40, "Name must be less than 40 characters"),
-  email: z.string().email("Invalid email address"),
-  password: z.string().min(8, "Password must have at least 8 characters").max(25, "Password must be less than 25 characters"),
-});
+import { schema, ValidationTypes } from "../../../lib/types";
+import { useRouter } from "next/router";
 
 const Page = () => {
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
     setError,
+    reset,
     formState: { errors, isSubmitting },
-  } = useForm<FormField>({
+  } = useForm<ValidationTypes>({
+    defaultValues: {
+      name: "",
+      email: "",
+      password: "",
+    },
     resolver: zodResolver(schema),
   });
 
-  const onSubmit: SubmitHandler<FormField> = async (data) => {
+  const onSubmit = async (data: ValidationTypes) => {
     try {
       await new Promise((resolve) => setTimeout(resolve, 1000));
       console.log(data);
+      reset();
+      router.push("/survey");
     } catch (error) {
-      setError("email", {
+      setError("root", {
         message: "This email is already taken",
       });
     }
@@ -52,21 +50,7 @@ const Page = () => {
 
         <div className={css["main-form__holder"]}>
           <TextField
-            {...register(
-              "name",
-
-              {
-                required: "Name is required",
-                minLength: {
-                  value: 2,
-                  message: "Name must have at least 2 chars",
-                },
-                maxLength: {
-                  value: 40,
-                  message: "Name can not be more than 40 chars",
-                },
-              }
-            )}
+            {...register("name")}
             className="white-text-field"
             style={{
               color: "#fff",
@@ -81,13 +65,7 @@ const Page = () => {
           {errors.name && <p className="error-text">{errors.name.message}</p>}
 
           <TextField
-            {...register(
-              "email",
-
-              {
-                required: "email is required",
-              }
-            )}
+            {...register("email")}
             className="white-text-field"
             style={{
               color: "#fff",
@@ -102,17 +80,7 @@ const Page = () => {
           {errors.email && <p className="error-text">{errors.email.message}</p>}
 
           <TextField
-            {...register("password", {
-              required: "password is required",
-              minLength: {
-                value: 8,
-                message: "password must be at least 8 chars",
-              },
-              maxLength: {
-                value: 25,
-                message: "password can not be more than 25 chars",
-              },
-            })}
+            {...register("password")}
             className="white-text-field"
             style={{
               color: "#fff",
@@ -126,12 +94,28 @@ const Page = () => {
             autoComplete="current-password"
           />
           {errors.password && <p className="error-text">{errors.password.message}</p>}
+
+          <TextField
+            {...register("confirmPassword")}
+            className="white-text-field"
+            style={{
+              color: "#fff",
+              width: "100%",
+              maxWidth: "700px",
+            }}
+            id="outlined-password-input"
+            label="Confirm password"
+            type="password"
+            placeholder="Repeat password"
+            autoComplete="current-password"
+          />
+          {errors.confirmPassword && <p className="error-text">{errors.confirmPassword.message}</p>}
         </div>
 
         <Button
           className={css["main-form__btn"]}
           disabled={isSubmitting}
-          href="/survey"
+          // href="/survey"
           type="submit"
           style={{
             width: "100%",

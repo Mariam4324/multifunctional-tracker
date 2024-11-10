@@ -69,6 +69,8 @@ span {
   color: #fff; /* Цвет метки при фокусе */
 }
 
-.text-error {
-  color: darkred;
+.error-text {
+  color: rgba(122, 0, 0, 0.74);
+  margin-top: -10px;
+  text-align: left;
 }
