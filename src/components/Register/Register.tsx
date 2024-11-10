@@ -5,7 +5,6 @@ import css from "./Register.module.scss";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { schema, ValidationTypes } from "../../../lib/types";
-import { useState } from "react";
 
 const Page = () => {
   const {
@@ -31,7 +30,7 @@ const Page = () => {
       reset();
       return (window.location.href = "/survey");
     } catch (error) {
-      console.log(error);
+      setError(error);
     }
   };
 
