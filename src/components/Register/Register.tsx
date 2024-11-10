@@ -5,11 +5,9 @@ import css from "./Register.module.scss";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { schema, ValidationTypes } from "../../../lib/types";
-import { useRouter } from "next/router";
+import { useState } from "react";
 
 const Page = () => {
-  const router = useRouter();
-
   const {
     register,
     handleSubmit,
@@ -31,11 +29,9 @@ const Page = () => {
       await new Promise((resolve) => setTimeout(resolve, 1000));
       console.log(data);
       reset();
-      router.push("/survey");
+      return (window.location.href = "/survey");
     } catch (error) {
-      setError("root", {
-        message: "This email is already taken",
-      });
+      console.log(error);
     }
   };
 
