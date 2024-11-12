@@ -1,9 +1,12 @@
 "use client";
-import Question from "@/components/Question/Question";
-import { Button, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import SurveyRadio from "../SurveyOptions/SurveyOptions";
+import { Button, Typography, FormControl, RadioGroup } from "@mui/material";
+import { useState } from "react";
 import css from "./Survey.module.scss";
 import StartRoundedIcon from "@mui/icons-material/StartRounded";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { surveySchema, surveyTypes } from "../../../lib/types";
 
 const questions = [
   {
@@ -14,7 +17,7 @@ const questions = [
   {
     id: 2,
     question: "How often will you use this app?",
-    options: ["daily", "sometimes", "rerely"],
+    options: ["often", "sometimes", "rarely"],
   },
   {
     id: 3,
@@ -24,39 +27,43 @@ const questions = [
 ];
 
 const Survey = () => {
-  const [currentQuestionId, setCurrentQuestionId] = useState(1);
-  const [selectedOption, setSelectedOption] = useState<boolean>(false);
-  let currentQue = questions.find((que) => que.id === currentQuestionId);
+  const [quePage, setQuePage] = useState(1);
+  const currentQue = questions.find((que) => que.id === quePage);
 
-  useEffect(() => {
-    const updatedQue = questions.find((que) => que.id === currentQuestionId);
-
-    if (updatedQue) {
-      currentQue = updatedQue;
-    } else {
-      currentQue = { id: 0, question: "error", options: ["please, try later"] };
-    }
-  }, [currentQuestionId]);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<surveyTypes>({
+    resolver: zodResolver(surveySchema),
+    defaultValues: {
+      radio: "",
+    },
+  });
 
   const scrollPageHandler = () => {
-    setSelectedOption(false);
-    if (currentQuestionId <= questions.length) {
-      return setCurrentQuestionId((prev) => prev + 1);
+    if (quePage <= questions.length) {
+      return setQuePage((prev) => prev + 1);
     }
   };
 
-  const scrollPageBackHandler = () => {
-    setSelectedOption(true);
-    if (currentQuestionId > 1) {
-      return setCurrentQuestionId((prev) => prev - 1);
+  const scrollPageBackHandler: () => void = () => {
+    if (quePage > 1) {
+      return setQuePage((prev) => prev - 1);
     } else {
-      setCurrentQuestionId(1);
+      return setQuePage(1);
     }
+  };
+
+  const onSubmit = (data: surveyTypes) => {
+    console.log(data);
+    console.log("onSubmit");
+    return scrollPageHandler();
   };
 
   return (
     <div className={css.survey}>
-      {currentQuestionId > questions.length ? (
+      {quePage > questions.length ? (
         <>
           <div className={css["survey-finish"]}>
             <Typography className={css["survey-finish__title"]} color="white">
@@ -68,23 +75,39 @@ const Survey = () => {
           </div>
 
           <div className={css.survey__btns}>
-            <Button className={css["survey-btn"]} onClick={scrollPageBackHandler} variant="outlined" disabled={currentQuestionId === 1}>
-              Back
+            <Button className={css["survey-btn"]} onClick={scrollPageBackHandler} variant="outlined" disabled={quePage === 1}>
+              Prev
             </Button>
           </div>
         </>
       ) : (
-        <>
-          <Question setSelectedOption={setSelectedOption} queTitle={currentQue.question} queAnswers={currentQue.options} />
+        <form onSubmit={handleSubmit(onSubmit)} className={css.survey__form}>
+          <div>
+            <Typography color="white" style={{ fontSize: "28px", fontWeight: "700" }}>
+              {currentQue?.question || "Question does not exist"}
+            </Typography>
+            <FormControl style={{ marginTop: "5px" }}>
+              <RadioGroup {...register("radio")} row aria-labelledby="demo-row-radio-buttons-group-label" name="row-radio-buttons-group">
+                {currentQue?.options.length
+                  ? currentQue?.options.map((el) => {
+                      return <SurveyRadio key={el} value={el} />;
+                    })
+                  : "Loading..."}
+              </RadioGroup>
+            </FormControl>
+            {errors.radio && <p className={css.survey__error}>{errors.radio.message}</p>}
+          </div>
+
           <div className={css.survey__btns}>
-            <Button className={css["survey-btn"]} onClick={scrollPageBackHandler} variant="outlined" disabled={currentQuestionId === 1}>
-              Back
+            <Button className={css["survey-btn"]} onClick={scrollPageBackHandler} variant="outlined" disabled={quePage === 1}>
+              Prev
             </Button>
-            <Button className={css["survey-btn"]} onClick={scrollPageHandler} variant="outlined" disabled={currentQuestionId > questions.length || selectedOption === false}>
-              Next
+
+            <Button type="submit" className={css["survey-btn"]} disabled={isSubmitting} variant="outlined">
+              {isSubmitting ? "Loading..." : "Next"}
             </Button>
           </div>
-        </>
+        </form>
       )}
     </div>
   );

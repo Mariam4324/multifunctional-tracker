@@ -17,5 +17,10 @@ export const loginSchema = z.object({
   password: z.string().min(8, "password must have at least 8 chars").max(25, "Password must be less than 25 chars"),
 });
 
+export const surveySchema = z.object({
+  radio: z.string().nonempty("choose an option please"),
+});
+
 export type registerTypes = z.infer<typeof registerSchema>;
 export type loginTypes = z.infer<typeof loginSchema>;
+export type surveyTypes = z.infer<typeof surveySchema>;
