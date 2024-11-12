@@ -1,53 +1,61 @@
 .survey {
-    max-width: 45vw;
-    width: 100%;
-    min-height: 300px;
-    margin: 100px auto 0;
+  width: max-content;
+  margin: 50px auto 0;
+  text-align: center;
+  padding: 40px 80px;
+  border: 1px solid lightgray;
+  background-color: rgba($color: #b0a2a281, $alpha: 0.5);
+  border-radius: 14px;
+
+  &__form {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     align-items: center;
-    padding: 25px 40px;
-    border: 1px solid lightgray;
-    background-color: rgba($color: #b0a2a281, $alpha: 0.5);
-    border-radius: 14px;
-  
-    &__btns {
-      margin-top: 40px;
+    justify-content: space-between;
+    text-align: center;
+    gap: 15px;
+  }
+
+  &__btns {
+    margin-top: 40px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &-btn {
+    border-color: white;
+    color: white;
+    text-transform: none;
+    max-width: 300px;
+  }
+
+  &-finish {
+    &__title {
+      text-align: center;
+      font-weight: 700;
+      font-size: 24px;
+    }
+
+    &__btn {
       display: flex;
-      gap: 8px;
       align-items: center;
       justify-content: center;
-    }
-  
-    &-btn {
-      border-color: white;
+      padding: 2px 8px;
+      max-width: 100px;
+      margin: 15px auto 0;
       color: white;
+      border: 1px solid white;
+      transition: 0.3s all;
+      font-weight: 600;
+      font-size: 18px;
       text-transform: none;
-      max-width: 300px;
-    }
-  
-    &-finish {
-      &__title {
-        text-align: center;
-        font-weight: 700;
-        font-size: 24px;
-      }
-  
-      &__btn {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 2px 8px;
-        max-width: 100px;
-        margin: 15px auto 0;
-        color: white;
-        border: 1px solid white;
-        transition: 0.3s all;
-        font-weight: 600;
-        font-size: 18px;
-        text-transform: none;
-      }
     }
   }
-  
+
+  &__error {
+    color: rgba(122, 0, 0, 0.74);
+    text-align: center;
+  }
+}
