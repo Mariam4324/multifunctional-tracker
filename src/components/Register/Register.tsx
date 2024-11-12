@@ -4,33 +4,33 @@ import ArrowCircleRightRoundedIcon from "@mui/icons-material/ArrowCircleRightRou
 import css from "./Register.module.scss";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { schema, ValidationTypes } from "../../../lib/types";
+import { registerSchema, registerTypes } from "../../../lib/types";
 
-const Page = () => {
+const Register = () => {
   const {
     register,
     handleSubmit,
     setError,
     reset,
     formState: { errors, isSubmitting },
-  } = useForm<ValidationTypes>({
+  } = useForm<registerTypes>({
     defaultValues: {
       name: "",
       email: "",
       password: "",
       confirmPassword: "",
     },
-    resolver: zodResolver(schema),
+    resolver: zodResolver(registerSchema),
   });
 
-  const onSubmit = async (data: ValidationTypes) => {
+  const formSubmit = async (data: registerTypes) => {
     try {
       await new Promise((resolve) => setTimeout(resolve, 1000));
       console.log(data);
       reset();
       return (window.location.href = "/survey");
     } catch (error) {
-      setError(error);
+      setError("root", { message: " account already exists" });
     }
   };
 
@@ -39,7 +39,7 @@ const Page = () => {
       <h1 className={css.main__title}>Nice to see you!</h1>
       <h2 className={css.main__subtitle}>Here you can track your work, studies, health and more!</h2>
 
-      <form onSubmit={handleSubmit(onSubmit)} className={css["main-form"]} action="/">
+      <form onSubmit={handleSubmit(formSubmit)} className={css["main-form"]} action="/">
         <div className={css["main-form__register"]}>
           <span className={css["main-form__title"]}>Register</span>
         </div>
@@ -111,7 +111,6 @@ const Page = () => {
         <Button
           className={css["main-form__btn"]}
           disabled={isSubmitting}
-          // href="/survey"
           type="submit"
           style={{
             width: "100%",
@@ -125,9 +124,10 @@ const Page = () => {
         >
           {isSubmitting ? "Loading..." : "Let's go"}
         </Button>
+        {errors.root && <p className="error-text">{errors.root.message}</p>}
       </form>
     </section>
   );
 };
 
-export default Page;
+export default Register;

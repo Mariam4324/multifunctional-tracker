@@ -1,16 +1,45 @@
+"use client";
+
 import { Button, Link, TextField } from "@mui/material";
 import GoogleIcon from "@mui/icons-material/Google";
 import ArrowCircleRightRoundedIcon from "@mui/icons-material/ArrowCircleRightRounded";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import css from "./Login.module.scss";
+import { useForm } from "react-hook-form";
+import { loginSchema, loginTypes } from "../../../lib/types";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-export default function Page() {
+export default function Login() {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    setError,
+    formState: { isSubmitting, errors },
+  } = useForm<loginTypes>({
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+    resolver: zodResolver(loginSchema),
+  });
+
+  const formSubmit = async (data: loginTypes) => {
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      console.log(data);
+      reset();
+      return (window.location.href = "/dashboard");
+    } catch (error) {
+      setError("root", { message: " account already exists" });
+    }
+  };
   return (
     <section className={css.main}>
       <h1 className={css.main__title}>Welcome to LifeTrack Pro!</h1>
       <h2 className={css.main__subtitle}>Here you can track your work, studies, health and more!</h2>
 
-      <form className={css["main-form"]} action="/">
+      <form onSubmit={handleSubmit(formSubmit)} className={css["main-form"]} action="/">
         <div className={css["main-form__register"]}>
           <span className={css["main-form__title"]}>Register with</span>
 
@@ -21,22 +50,27 @@ export default function Page() {
           </div>
         </div>
 
-        <span className={css["main-form__or"]}>or</span>
+        <span className={css["main-form__subtitle"]}>or</span>
+        <span className={css["main-form__subtitle"]}>Log in with</span>
 
         <div className={css["main-form__holder"]}>
           <TextField
+            {...register("email")}
             className="white-text-field"
             style={{
               color: "#fff",
               width: "100%",
               maxWidth: "700px",
             }}
-            id="outlined-textarea"
-            label="Name"
-            placeholder="Enter your name"
-            multiline
+            id="outlined-email-input"
+            label="Email"
+            type="Email"
+            placeholder="Enter email"
           />
+          {errors.email && <p className="error-text">{errors.email.message}</p>}
+
           <TextField
+            {...register("password")}
             className="white-text-field"
             style={{
               color: "#fff",
@@ -49,24 +83,13 @@ export default function Page() {
             placeholder="Enter password"
             autoComplete="current-password"
           />
-
-          <TextField
-            className="white-text-field"
-            style={{
-              color: "#fff",
-              width: "100%",
-              maxWidth: "700px",
-            }}
-            id="outlined-email-input"
-            label="Email"
-            type="Email"
-            placeholder="Enter email"
-          />
+          {errors.password && <p className="error-text">{errors.password.message}</p>}
         </div>
 
         <Button
           className={css["main-form__btn"]}
-          href="/survey"
+          type="submit"
+          disabled={isSubmitting}
           style={{
             width: "100%",
             maxWidth: "700px",
@@ -77,8 +100,9 @@ export default function Page() {
           variant="outlined"
           endIcon={<ArrowCircleRightRoundedIcon />}
         >
-          Sign up
+          {isSubmitting ? "Loading..." : "Sign up"}
         </Button>
+        {errors.root && <p className="error-text">{errors.root.message}</p>}
       </form>
     </section>
   );
