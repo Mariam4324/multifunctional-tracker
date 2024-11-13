@@ -57,7 +57,6 @@ const Survey = () => {
 
   const onSubmit = (data: surveyTypes) => {
     console.log(data);
-    console.log("onSubmit");
     return scrollPageHandler();
   };
 
@@ -88,9 +87,9 @@ const Survey = () => {
             </Typography>
             <FormControl style={{ marginTop: "5px" }}>
               <RadioGroup {...register("radio")} row aria-labelledby="demo-row-radio-buttons-group-label" name="row-radio-buttons-group">
-                {currentQue?.options.length
-                  ? currentQue?.options.map((el) => {
-                      return <SurveyRadio key={el} value={el} />;
+                {currentQue?.options.length               
+                  ? currentQue?.options.map((option) => {
+                      return <SurveyRadio key={option} value={option} />;
                     })
                   : "Loading..."}
               </RadioGroup>
