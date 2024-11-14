@@ -1,12 +1,9 @@
 "use client";
-import SurveyRadio from "../SurveyOptions/SurveyOptions";
+import SurveyOptions from "../SurveyOptions/SurveyOptions";
 import { Button, Typography, FormControl, RadioGroup } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import css from "./Survey.module.scss";
 import StartRoundedIcon from "@mui/icons-material/StartRounded";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { surveySchema, surveyTypes } from "../../../lib/types";
 
 const questions = [
   {
@@ -28,36 +25,24 @@ const questions = [
 
 const Survey = () => {
   const [quePage, setQuePage] = useState(1);
-  const currentQue = questions.find((que) => que.id === quePage);
+  let currentQue = questions.find((que) => que.id === quePage);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-  } = useForm<surveyTypes>({
-    resolver: zodResolver(surveySchema),
-    defaultValues: {
-      radio: "",
-    },
-  });
+  useEffect(() => {
+    currentQue = questions.find((que) => que.id === quePage);
+  }, [quePage]);
 
-  const scrollPageHandler = () => {
-    if (quePage <= questions.length) {
-      return setQuePage((prev) => prev + 1);
+  const scrollPageHandler: () => void = () => {
+    if (quePage < questions.length) {
+      setQuePage((prev) => prev + 1);
     }
   };
 
   const scrollPageBackHandler: () => void = () => {
     if (quePage > 1) {
-      return setQuePage((prev) => prev - 1);
+      setQuePage((prev) => prev - 1);
     } else {
-      return setQuePage(1);
+      setQuePage(1);
     }
-  };
-
-  const onSubmit = (data: surveyTypes) => {
-    console.log(data);
-    return scrollPageHandler();
   };
 
   return (
@@ -80,21 +65,20 @@ const Survey = () => {
           </div>
         </>
       ) : (
-        <form onSubmit={handleSubmit(onSubmit)} className={css.survey__form}>
+        <div className={css.survey__form}>
           <div>
             <Typography color="white" style={{ fontSize: "28px", fontWeight: "700" }}>
               {currentQue?.question || "Question does not exist"}
             </Typography>
-            <FormControl style={{ marginTop: "5px" }}>
-              <RadioGroup {...register("radio")} row aria-labelledby="demo-row-radio-buttons-group-label" name="row-radio-buttons-group">
-                {currentQue?.options.length               
+            <FormControl style={{ marginTop: "5px", display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
+              <RadioGroup row aria-labelledby="demo-row-radio-buttons-group-label" name="row-radio-buttons-group">
+                {currentQue?.options.length
                   ? currentQue?.options.map((option) => {
-                      return <SurveyRadio key={option} value={option} />;
+                      return <SurveyOptions key={option} value={option} />;
                     })
                   : "Loading..."}
               </RadioGroup>
             </FormControl>
-            {errors.radio && <p className={css.survey__error}>{errors.radio.message}</p>}
           </div>
 
           <div className={css.survey__btns}>
@@ -102,11 +86,11 @@ const Survey = () => {
               Prev
             </Button>
 
-            <Button type="submit" className={css["survey-btn"]} disabled={isSubmitting} variant="outlined">
-              {isSubmitting ? "Loading..." : "Next"}
+            <Button onClick={scrollPageHandler} type="submit" className={css["survey-btn"]} variant="outlined">
+              Next
             </Button>
           </div>
-        </form>
+        </div>
       )}
     </div>
   );
