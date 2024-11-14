@@ -1,0 +1,32 @@
+.tasks {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+
+  &__vertical {
+    padding: 20px 16px;
+    width: 100%;
+    background: #171c52;
+    border-radius: 20px;
+  }
+
+  &__label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+  }
+
+  &__calc {
+    font-size: 14px;
+    color: var(--gray);
+  }
+
+  &__add {
+    font-size: 14px;
+    text-transform: none;
+    color: white;
+    text-align: right;
+  }
+}
