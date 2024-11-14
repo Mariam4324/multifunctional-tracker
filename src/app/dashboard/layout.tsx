@@ -8,7 +8,7 @@ const DashboardLayout = ({ children }) => {
         <Sidebar />
       </div>
 
-      <div className={css.dashboard__content}> {children}</div>
+      <div className={css.dashboard__content}>{children}</div>
     </div>
   );
 };

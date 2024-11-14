@@ -18,7 +18,7 @@ export const loginSchema = z.object({
 });
 
 export const surveySchema = z.object({
-  radio: z.string().nonempty("choose an option please"),
+  survey: z.string()
 });
 
 export type registerTypes = z.infer<typeof registerSchema>;
