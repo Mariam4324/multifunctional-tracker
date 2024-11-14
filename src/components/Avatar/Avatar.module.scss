@@ -4,14 +4,20 @@
   gap: 8px;
   border-radius: 20px;
   padding: 12px;
-  background: #050b26;
-  border: 1px solid #0077ff6d;
   box-shadow: 0px 1px 50px 0px rgba(0, 0, 0, 0.08);
-  cursor: pointer;
 
   &__info {
     display: flex;
     flex-direction: column;
     justify-content: center;
+  }
+
+  &__name {
+    font-size: 18px;
+  }
+
+  &__email {
+    color: var(--gray);
+    font-size: 12px;
   }
 }

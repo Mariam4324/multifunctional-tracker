@@ -1,0 +1,45 @@
+.home {
+    &__title {
+      color: #fff;
+      font-size: 30px;
+      font-weight: 700;
+      line-height: 140%;
+    }
+  
+    &__subtitle {
+      color: #fff;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 150%;
+    }
+  
+    &__link {
+      display: block;
+      margin-top: 100px;
+      color: #fff;
+      transition: 0.5s all;
+      text-decoration: none;
+    }
+  
+    &__line {
+      width: max-content;
+      position: relative;
+    }
+  
+    &__link::after {
+      content: "";
+      display: block;
+      height: 1px;
+      background: #fff;
+      width: 0;
+      transition: width 0.3s ease; /* Плавное изменение ширины */
+      position: absolute;
+      bottom: 0px; /* Находимся у нижней границы */
+      left: 0; /* Слева */
+    }
+  
+    &__link:hover::after {
+      width: 100%; /* Увеличиваем до 100% при наведении */
+    }
+  }
+  
