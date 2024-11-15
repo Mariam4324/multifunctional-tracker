@@ -1,19 +1,39 @@
 .survey {
-  width: max-content;
-  margin: 50px auto 0;
-  text-align: center;
-  padding: 40px 80px;
-  border: 1px solid lightgray;
-  background-color: rgba($color: #b0a2a281, $alpha: 0.5);
-  border-radius: 14px;
+  &__title {
+    margin: 36px auto 0;
+    font-size: 30px;
+    text-align: center;
+    font-weight: 700;
+  }
 
   &__form {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    text-align: center;
     gap: 15px;
+    text-align: center;
+    padding: 40px 80px;
+    border: 1px solid lightgray;
+    max-width: 40vw;
+    width: 100%;
+    margin: 20px auto 0;
+    background-color: rgba($color: #b0a2a281, $alpha: 0.5);
+    border-radius: 14px;
+  }
+
+  &__question {
+    color: white;
+    font-size: 28px;
+    font-weight: 600;
+  }
+
+  &__formControl {
+    margin-top: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
   }
 
   &__btns {
@@ -24,38 +44,12 @@
     justify-content: center;
   }
 
-  &-btn {
+  &__btn {
     border-color: white;
     color: white;
     text-transform: none;
     max-width: 300px;
-  }
-
-  &-finish {
-    &__title {
-      text-align: center;
-      font-weight: 700;
-      font-size: 24px;
-    }
-
-    &__btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 2px 8px;
-      max-width: 100px;
-      margin: 15px auto 0;
-      color: white;
-      border: 1px solid white;
-      transition: 0.3s all;
-      font-weight: 600;
-      font-size: 18px;
-      text-transform: none;
-    }
-  }
-
-  &__error {
-    color: rgba(122, 0, 0, 0.74);
-    text-align: center;
+    font-weight: 600;
+    border: 1.5px solid white;
   }
 }
