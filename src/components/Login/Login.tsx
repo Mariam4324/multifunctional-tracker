@@ -56,6 +56,7 @@ export default function Login() {
         <div className={css["main-form__holder"]}>
           <TextField
             {...register("email")}
+            error={errors.email}
             className="white-text-field"
             style={{
               color: "#fff",
@@ -71,6 +72,7 @@ export default function Login() {
 
           <TextField
             {...register("password")}
+            error={errors.password}
             className="white-text-field"
             style={{
               color: "#fff",

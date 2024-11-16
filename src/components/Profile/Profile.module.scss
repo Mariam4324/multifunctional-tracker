@@ -2,4 +2,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  &__settings {
+    cursor: pointer;
+    color: var(--gray);
+  }
 }

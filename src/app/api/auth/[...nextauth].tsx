@@ -1,6 +1,6 @@
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
-import clientPromise from "../../../../lib/mongodb"; // Путь к вашему клиенту MongoDB
+import clientPromise from "../../../lib/mongodb"; // Путь к вашему клиенту MongoDB
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 
 export default NextAuth({
