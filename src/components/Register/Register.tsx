@@ -4,7 +4,7 @@ import ArrowCircleRightRoundedIcon from "@mui/icons-material/ArrowCircleRightRou
 import css from "./Register.module.scss";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { registerSchema, registerTypes } from "../../../lib/types";
+import { registerSchema, registerTypes } from "../../lib/types";
 
 const Register = () => {
   const {
@@ -48,6 +48,7 @@ const Register = () => {
           <TextField
             {...register("name")}
             className="white-text-field"
+            error={errors.name}
             style={{
               color: "#fff",
               width: "100%",
@@ -63,6 +64,7 @@ const Register = () => {
           <TextField
             {...register("email")}
             className="white-text-field"
+            error={errors.email}
             style={{
               color: "#fff",
               width: "100%",
@@ -77,6 +79,7 @@ const Register = () => {
 
           <TextField
             {...register("password")}
+            error={errors.password}
             className="white-text-field"
             style={{
               color: "#fff",

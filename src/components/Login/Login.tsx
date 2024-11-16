@@ -6,7 +6,7 @@ import ArrowCircleRightRoundedIcon from "@mui/icons-material/ArrowCircleRightRou
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import css from "./Login.module.scss";
 import { useForm } from "react-hook-form";
-import { loginSchema, loginTypes } from "../../../lib/types";
+import { loginSchema, loginTypes } from "../../lib/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 export default function Login() {
