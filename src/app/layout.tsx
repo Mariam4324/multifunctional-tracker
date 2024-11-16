@@ -22,6 +22,8 @@ export default function RootLayout({ children }: LayoutProps) {
     <html lang="en">
       <head>
         <link rel="icon" type="image/x-icon" href="/favicon.png"></link>
+        <link rel="preconnect" href="https://fonts.googleapis.com"></link>
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin></link>
       </head>
       <body className={poppinsFont.className}>{children}</body>
     </html>
