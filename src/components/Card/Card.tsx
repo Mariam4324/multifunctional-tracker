@@ -7,7 +7,7 @@ interface CardProps {
 }
 
 const Card = ({ children, backgroundColor }: CardProps) => {
-  return <div className={css[`card__${backgroundColor}`]}>{children}</div>;
+  return <div className={`${css[`card__${backgroundColor}`]} ${css.card}`}>{children}</div>;
 };
 
 export default Card;

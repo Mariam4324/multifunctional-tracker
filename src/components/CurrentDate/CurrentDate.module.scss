@@ -1,0 +1,14 @@
+.date {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--gray);
+
+  &__weekday {
+    font-weight: 600;
+  }
+
+  &__info {
+    font-weight: 400;
+  }
+}

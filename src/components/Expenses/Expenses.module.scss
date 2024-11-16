@@ -1,0 +1,32 @@
+.expenses {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 40vw;
+  width: 100%;
+  color: var(--gray);
+  border-radius: 20px;
+  padding: 20px 28px;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../../../public/card_bg.webp") center center/cover no-repeat;
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  &__title {
+    color: var(--white);
+    font-size: 40px;
+    font-weight: 600;
+    line-height: 50px;
+    letter-spacing: 0.667px;
+    font-family: "Poppins";
+  }
+
+  &__plus {
+    cursor: pointer;
+    width: 28px;
+    height: 28px;
+  }
+}

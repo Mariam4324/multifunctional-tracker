@@ -1,7 +1,7 @@
 import css from "./Sidebar.module.scss";
 import { Button } from "@mui/material";
 import Profile from "../Avatar/Avatar";
-import { HeartPulse, House, LayoutList, Settings, UserRound } from "lucide-react";
+import { HeartPulse, House, LayoutList, Settings, UserRound, Wallet } from "lucide-react";
 
 const sidebarLinks = [
   {
@@ -10,14 +10,19 @@ const sidebarLinks = [
     icon: House,
   },
   {
+    title: "Profile",
+    path: "/dashboard/profile",
+    icon: UserRound,
+  },
+  {
     title: "Tasks",
     path: "/dashboard/tasks",
     icon: LayoutList,
   },
   {
-    title: "Profile",
-    path: "/dashboard/profile",
-    icon: UserRound,
+    title: "Expenses",
+    path: "/dashboard/expenses",
+    icon: Wallet,
   },
   {
     title: "Health tracking",
@@ -35,7 +40,7 @@ const Sidebar = () => {
   return (
     <aside className={css.sidebar}>
       <Profile />
-      
+
       <nav className={css.sidebar__menu}>
         <ul className={css.sidebar__list}>
           {sidebarLinks.map((el) => {

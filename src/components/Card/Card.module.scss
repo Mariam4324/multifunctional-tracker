@@ -1,15 +1,18 @@
 .card {
+  border-radius: 20px;
+  padding: 20px 28px;
+  backdrop-filter: blur(60px);
+  width: max-content;
+
   &__primary {
-    border-radius: 20px;
-    padding: 20px 28px;
     background: url("../../../public/card_bg.webp") center center/cover no-repeat;
-    backdrop-filter: blur(60px);
   }
 
   &__secondary {
-    border-radius: 20px;
-    padding: 20px 28px;
     background: linear-gradient(139deg, rgba(6, 11, 40, 0.94) 17.44%, rgba(10, 14, 35, 0.49) 93.55%, rgba(10, 14, 35, 0.69) 93.55%);
-    backdrop-filter: blur(60px);
+  }
+
+  &__dark {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../../../public/card_bg.webp") center center/cover no-repeat;
   }
 }
