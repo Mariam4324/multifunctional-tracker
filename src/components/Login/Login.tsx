@@ -36,7 +36,7 @@ export default function Login() {
   };
   return (
     <section className={css.main}>
-      <h1 className={css.main__title}>Welcome to LifeTrack Pro!</h1>
+      <h1 className={css.main__title}>Welcome to Tlo!</h1>
       <h2 className={css.main__subtitle}>Here you can track your work, studies, health and more!</h2>
 
       <form onSubmit={handleSubmit(formSubmit)} className={css["main-form"]} action="/">
