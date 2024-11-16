@@ -22,12 +22,18 @@ const questions = [
   {
     id: 3,
     question: "Are you ready to help me improve?",
-    options: ["Yes", "No"],
+    options: ["yes", "no"],
+  },
+  {
+    id: 4,
+    question: "What gender are you?",
+    options: ["male", "female"],
   },
 ];
 
 const Survey = () => {
   const [quePage, setQuePage] = useState(1);
+  const [answersData, setAnswersData] = useState({});
   let currentQue = questions.find((que) => que.id === quePage);
   const {
     control,
@@ -70,7 +76,13 @@ const Survey = () => {
   const formHandler = async (data: surveyTypes) => {
     try {
       await new Promise((resolve) => setTimeout(resolve, 1000));
-      console.log(data);
+      setAnswersData((prevData) => {
+        return {
+          ...prevData,
+          data,
+        };
+      });
+      console.log(answersData);
       scrollPageHandler();
       reset();
     } catch (error) {
