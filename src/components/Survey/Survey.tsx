@@ -4,9 +4,9 @@ import { Button, Typography, FormControl, RadioGroup } from "@mui/material";
 import { useEffect, useState } from "react";
 import css from "./Survey.module.scss";
 import { LogIn } from "lucide-react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { surveySchema, surveyTypes } from "../../../lib/types";
+import { surveySchema, surveyTypes } from "../../lib/types";
 
 const questions = [
   {
@@ -30,12 +30,13 @@ const Survey = () => {
   const [quePage, setQuePage] = useState(1);
   let currentQue = questions.find((que) => que.id === quePage);
   const {
-    register,
+    control,
     handleSubmit,
     reset,
     setError,
     formState: { errors, isSubmitting },
   } = useForm({
+    mode: "onSubmit",
     resolver: zodResolver(surveySchema),
     defaultValues: {
       survey: "",
@@ -70,8 +71,8 @@ const Survey = () => {
     try {
       await new Promise((resolve) => setTimeout(resolve, 1000));
       console.log(data);
+      scrollPageHandler();
       reset();
-      return (window.location.href = "/survey");
     } catch (error) {
       setError("root", { message: "account already exists" });
       console.log(error);
@@ -95,28 +96,31 @@ const Survey = () => {
       ) : (
         <>
           <h5 className={css.survey__title}>Answer a couple of questions, please</h5>
-          <form action="/" onSubmit={handleSubmit(formHandler)} className={css.survey__form}>
-            <div>
-              <Typography className={css.survey__question}>{currentQue?.question || "Question does not exist"}</Typography>
-              <FormControl className={css.survey__formControl}>
-                <RadioGroup {...register("survey")} row aria-labelledby="demo-row-radio-buttons-group-label" name="row-radio-buttons-group">
-                  {currentQue?.options.length
-                    ? currentQue?.options.map((option) => {
-                        return <SurveyOptions key={option} value={option} />;
-                      })
-                    : "Loading..."}
-                </RadioGroup>
-              </FormControl>
-            </div>
+          <form onSubmit={handleSubmit(formHandler)} className={css.survey__form}>
+            <Controller
+              name="survey"
+              control={control}
+              render={({ field }) => (
+                <>
+                  <Typography className={css.survey__question}>{currentQue?.question || "Question does not exist"}</Typography>
+                  <RadioGroup {...field} row aria-labelledby="demo-row-radio-buttons-group-label">
+                    {currentQue?.options.map((option) => (
+                      <SurveyOptions key={option} value={option} />
+                    ))}
+                  </RadioGroup>
+                  {errors.survey && <p className={css.survey__error}>{errors.survey.message}</p>}
+                </>
+              )}
+            />
+
             <div className={css.survey__btns}>
               <Button className={css.survey__btn} onClick={scrollPageBackHandler} variant="outlined" disabled={quePage === 1}>
                 Back
               </Button>
-              <Button onClick={scrollPageHandler} type="submit" disabled={isSubmitting} className={css.survey__btn} variant="outlined">
+              <Button type="submit" disabled={isSubmitting} className={css.survey__btn} variant="outlined">
                 {isSubmitting ? "Loading..." : "Next"}
               </Button>
             </div>
-            {errors.survey && <p className="error-text">{errors.survey.message}</p>}
           </form>
         </>
       )}

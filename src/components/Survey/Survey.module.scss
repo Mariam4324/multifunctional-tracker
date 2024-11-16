@@ -52,4 +52,11 @@
     font-weight: 600;
     border: 1.5px solid white;
   }
+
+  &__error {
+    color: rgba(122, 0, 0, 0.74);
+    text-align: center;
+    margin: 0 auto;
+    
+  }
 }
