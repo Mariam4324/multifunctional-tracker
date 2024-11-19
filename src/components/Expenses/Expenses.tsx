@@ -6,13 +6,18 @@ import { CirclePlus } from "lucide-react";
 const Expenses = () => {
   return (
     <div className={css.expenses}>
-      <div className={css.expenses__header}>
-        <Typography className={css.expenses__title} variant="h3">
-          Expenses
-        </Typography>
-        <Date />
+      <div className={css.expenses__card}>
+        <div className={css.expenses__info}>
+          <Typography className={css.expenses__title} variant="h3">
+            Expenses
+          </Typography>
+          <Date />
+        </div>
+
+        <CirclePlus className={css.expenses__plus} />
       </div>
-      <CirclePlus className={css.expenses__plus} />
+
+      <ul className={css.expenses__list}></ul>
     </div>
   );
 };

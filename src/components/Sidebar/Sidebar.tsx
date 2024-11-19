@@ -1,7 +1,7 @@
 import css from "./Sidebar.module.scss";
 import { Button } from "@mui/material";
 import Profile from "../Avatar/Avatar";
-import { HeartPulse, House, LayoutList, Settings, UserRound, Wallet } from "lucide-react";
+import { Banknote, HeartPulse, House, LayoutList, Settings, UserRound, Wallet } from "lucide-react";
 
 const sidebarLinks = [
   {
@@ -22,6 +22,11 @@ const sidebarLinks = [
   {
     title: "Expenses",
     path: "/dashboard/expenses",
+    icon: Banknote,
+  },
+  {
+    title: "Budget",
+    path: "/dashboard/budget",
     icon: Wallet,
   },
   {

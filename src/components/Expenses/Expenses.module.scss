@@ -1,7 +1,4 @@
 .expenses {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   max-width: 40vw;
   width: 100%;
   color: var(--gray);
@@ -9,7 +6,13 @@
   padding: 20px 28px;
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../../../public/card_bg.webp") center center/cover no-repeat;
 
-  &__header {
+  &__card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__info {
     display: flex;
     flex-direction: column;
     gap: 10px;
