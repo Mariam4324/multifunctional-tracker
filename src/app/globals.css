@@ -1,9 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 :root {
-  /* --main-color: zinc; */
   --white: #fff;
   --bg: #fffcf8;
   --bg: linear-gradient(159deg, #0f123b 14.25%, #090d2e 56.45%, #020515 86.14%);
@@ -33,7 +29,7 @@ body {
   margin: 0 auto;
   box-sizing: content-box;
 }
-
+  
 a {
   text-decoration: none;
 }
@@ -81,7 +77,7 @@ span {
   margin-top: -20px;
   text-align: left;
 }
-
+/* 
 /* @layer base {
   :root {
     --background: 0 0% 100%;
@@ -145,4 +141,4 @@ span {
   body {
     @apply bg-background text-foreground;
   }
-} */
+} */ */
