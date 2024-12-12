@@ -1,4 +1,4 @@
-import "./globals.scss";
+import "./globals.css";
 import { Poppins } from "next/font/google";
 import { Metadata } from "next";
 import { ReactNode } from "react";
